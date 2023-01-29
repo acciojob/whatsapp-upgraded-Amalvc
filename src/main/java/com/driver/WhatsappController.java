@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WhatsappController {
 
     //Autowire will not work in this case, no need to change this and add autowire
+
     WhatsappService whatsappService = new WhatsappService();
 
     @PostMapping("/add-user")
@@ -27,7 +28,8 @@ public class WhatsappController {
         //If the mobile number exists in database, throw "User already exists" exception
         //Otherwise, create the user and return "SUCCESS"
 
-        return whatsappService.createUser(name, mobile);
+        whatsappService.createUser(name, mobile);
+        return "SUCCESS";
     }
 
     @PostMapping("/add-group")
@@ -67,7 +69,8 @@ public class WhatsappController {
         //Throw "User is not a participant" if the user is not a part of the group
         //Change the admin of the group to "user" and return "SUCCESS". Note that at one time there is only one admin and the admin rights are transferred from approver to user.
 
-        return whatsappService.changeAdmin(approver, user, group);
+        whatsappService.changeAdmin(approver, user, group);
+        return "SUCCESS";
     }
 
     @DeleteMapping("/remove-user")
@@ -87,6 +90,6 @@ public class WhatsappController {
         // Find the Kth latest message between start and end (excluding start and end)
         // If the number of messages between given time is less than K, throw "K is greater than the number of messages" exception
 
-        return whatsappService.findMessage(start, end, K);
+        return null;
     }
 }
